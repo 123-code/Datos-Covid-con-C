@@ -1,15 +1,15 @@
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <math.h>
 # define tam 100
 
-void ingresodatos(int[],char[tam][tam],float[],int,int[],int[]);
-void Mostrardatos(int[],char[tam][tam],float[tam],int,int[tam]);
-void consultardatos(int[],char[tam][tam],float[tam],int,int[tam]);
-void Modificardatos(int[],char[tam][tam],float[tam],int,int[tam]);
-void eliminardatos(int[],char[tam][tam],float[tam],int,int[tam]);
-void registrarvacunacion(int[],char[tam][tam],float[tam],int,int[tam]);
+void ingresodatos(int[],char[][tam],float[],int,int[],int[]);
+void Mostrardatos(int[],char[][tam],float[tam],int,int[tam]);
+void consultardatos(int[],char[][tam],float[tam],int,int[tam],int[tam]);
+void Modificardatos(int[],char[][tam],float[tam],int,int[tam],int[tam]);
+void eliminardatos(int[],char[][tam],float[tam],int,int[tam],int[tam]);
+void registrarvacunacion(int[],char[][tam],float[tam],int,int[tam],int[tam]);
 
 
 int main(void) {
@@ -20,17 +20,17 @@ int c_pacientes,vacunacion[tam],cedula[tam];
   do{
   printf(" 1. Ingresar datos del paciente \n 2. Mostrar datos del paciente \n 3. consultar dato especifico \n 4. Modificar Datos de paciente \n 5. Eliminar datos de paciente\n 6. Registrar Vacunacion \n 7. Salir.");
 
-  printf("\n Escoger una opcion:");
+  printf("\n Seleccione una opcion:");
   scanf("%d",&op);
 
   switch(op){
     case 1:
     do{
-    printf("Ingrese la cantidad de pacientes a registrar:");
+    printf("Ingrese la cantidad de pacientes a registrar: ");
     scanf("%d",&c_pacientes);
     } while(c_pacientes <= 0);
 
-    ingresodatos(edad ,nombre,igg,c_pacientes,vacunacion,cedula);
+    ingresodatos(edad,nombre,igg,c_pacientes,vacunacion,cedula);
     getchar();
     system("clear");
 
@@ -39,30 +39,30 @@ int c_pacientes,vacunacion[tam],cedula[tam];
     case 2:
     Mostrardatos(edad,nombre,igg,c_pacientes,vacunacion);
     getchar();
-     system("clear");
+     
     break;
 
     case 3:
-consultardatos(edad ,nombre,igg,c_pacientes,vacunacion);
+consultardatos(edad ,nombre,igg,c_pacientes,vacunacion,cedula);
 getchar();
  system("clear");
 break;
 
    case 4:
 
-Modificardatos(edad ,nombre,igg,c_pacientes,vacunacion);
+Modificardatos(edad ,nombre,igg,c_pacientes,vacunacion,cedula);
 getchar();
  system("clear");
 break;
 
 case 5:
-eliminardatos(edad ,nombre,igg,c_pacientes,vacunacion);
+eliminardatos(edad ,nombre,igg,c_pacientes,vacunacion,cedula);
 getchar();
  system("clear");
 break;
 
 case 6:
-registrarvacunacion(edad ,nombre,igg,c_pacientes,vacunacion);
+registrarvacunacion(edad ,nombre,igg,c_pacientes,vacunacion,cedula);
 getchar();
  system("clear");
 break;
@@ -83,7 +83,7 @@ break;
   return 0;
 }
 
-void guardardatos(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes){
+void guardardatos(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes,int cedula[tam]){
 int cont;
 FILE * archivo;
 
@@ -97,22 +97,20 @@ for(cont=0;cont<c_pacientes;cont++){
 fclose(archivo);
 }
 
-void ingresodatos(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes, int vacunacion[tam],int cedula[tam]){
+void ingresodatos(int edad[tam],char nombre[][tam],float igg[tam],int c_pacientes, int vacunacion[tam],int cedula[tam]){
 int cont,nDigits[tam];
 int fecha[tam];
 char estado[tam],vacuna[tam];
 
 for(cont=0;cont<c_pacientes;cont++){
-  printf("Paciente %d\n:",cont+1);
-
-
-printf("Ingrese el nombre:\n");
+  
+printf(" Paciente %d\n",cont+1);
+getchar();
+  printf("Ingrese Nombre :\n");
 fgets(nombre[cont],tam,stdin);
 
 
 do{
-
-  
   printf("Ingrese la cedula del paciente:");
   scanf("%d",&cedula[cont]);
   nDigits[cont] = floor(log10(abs(cedula[cont]))) + 1;
@@ -126,11 +124,11 @@ scanf("%d",&edad[cont]);
 
 printf("Ingrese el valor Igg de %s",nombre[cont]);
 scanf("%f",&igg[cont]);
-}
 
-printf("Se encuentra %s vacunado contra el COVID-19?1. si/2. no",nombre[cont]);
+
+printf("Se encuentra %s vacunado contra el COVID-19?1 si/ 2 no",nombre[cont]);
 scanf("%d",&vacunacion[cont]);
-
+}
 
 //}while(vacunacion[cont] != 1 || vacunacion[cont] != 2);
 if(vacunacion[cont] == 1){
@@ -138,8 +136,7 @@ if(vacunacion[cont] == 1){
   printf("Ingrese nombre de la vacuna aplicada a %s: ",nombre[cont]);
   fgets(vacuna,tam,stdin);
   
-  printf("Ingrese fecha de vacunacion de %s:",nombre[cont]);
-  fgets(fecha,tam,stdin);
+ 
 
 }
 else if(vacunacion[cont] == 2){
@@ -147,33 +144,33 @@ else if(vacunacion[cont] == 2){
 
   
 }
-guardardatos(edad,nombre,igg,c_pacientes);
+guardardatos(edad,nombre,igg,c_pacientes,cedula);
 }
 
 
 
-void consultardatos(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes,int vacunacion[tam]){
+void consultardatos(int edad[tam],char nombre[][tam],float igg[tam],int c_pacientes, int vacunacion[tam],int cedula[tam]){
 
 int cont,bandera;
 char busqueda[tam][tam];
-getchar();
-printf("Ingrese Nombre A buscar:");
-fgets(busqueda[cont],tam,stdin);
+
+
+ printf("Ingrese Nombre del Paciente a buscar:");
+ fgets(nombre[cont],tam,stdin);
 
 for(cont=0;cont<c_pacientes;cont++){
   if(strcmp(nombre[cont],busqueda[cont])==0){
-    printf("datos %s\n",nombre[cont]);
-printf("Edad: %d\n",edad[cont]);
-printf("Igg:%f",igg[cont]);
-bandera = 1;
-break;
+    printf("Datos %s\n",nombre[cont]);
+    printf("Edad: %d\n",edad[cont]);
+    printf("Igg:%f",igg[cont]);
+    bandera = 1;
+    break;
   }
   if(bandera == 0){
     printf("Registro No encontrado :(");
-
   }
 }
-guardardatos(edad,nombre,igg,c_pacientes);
+guardardatos(edad,nombre,igg,c_pacientes,cedula);
 }
 
 void analizarigg(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes){
@@ -184,27 +181,27 @@ for(cont=0;cont<c_pacientes;cont++){
 }
 }
 
-void registrarvacunacion(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes,int vacunacion[tam]){
+void registrarvacunacion(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes,int vacunacion[tam],int cedula[tam]){
   
-   int cont;
-    char vac[tam];
-    char beneficiario[tam];
-   int edad_v[tam];
+  int cont;
+  char vac[tam];
+  char beneficiario[tam];
+  int edad_v[tam];
    
 do{
   do{
-    printf("ingrese edad, valores entre 1 y 99");
+    printf("Ingrese edad, valores entre 1 y 116");
     scanf("%d",&edad_v[cont]);
-  }while(edad_v[cont]<=0 || edad_v[cont]>=100);
+  }while(edad_v[cont]<=0 || edad_v[cont]>=116);
 
-    printf("Ingrese nombre del paciente:");
-    fgets(beneficiario,tam,stdin);
+  printf("Ingrese nombre del paciente:");
+  fgets(beneficiario,tam,stdin);
 
-    printf("Ingrese Vacuna aplicada a %s",nombre[cont]);
-    fgets(vac,tam,stdin);
+  printf("Ingrese Vacuna aplicada a %s",nombre[cont]);
+  fgets(vac,tam,stdin);
 // faltan Validaciones. 
-}while(edad_v[cont]!=0);
-guardardatos(edad,nombre,igg,c_pacientes);
+  }while(edad_v[cont]!=0);
+  guardardatos(edad,nombre,igg,c_pacientes,cedula);
 }
 
 void Mostrardatos(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes,int cedula[tam]){
@@ -223,20 +220,20 @@ if(archivo != NULL){
  }
 }
 
-else{
+else if (archivo == NULL) {
   printf("El Archivo No existe.");
 
 }
 fclose(archivo);
-guardardatos(edad,nombre,igg,c_pacientes);
+guardardatos(edad,nombre,igg,c_pacientes,cedula);
 }
 
-void eliminardatos(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes,int vacunacion[tam]){
+void eliminardatos(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes,int vacunacion[tam],int cedula[tam]){
 
 int cont,bandera;
 char elim [tam][tam];
 
-printf("Ingrese dato que desea eliminar:");
+printf("Ingrese el dato que desea eliminar:");
 fgets(elim[cont],tam,stdin);
 for(cont=0;cont<c_pacientes;cont++){
   if(strcmp(nombre[cont],elim[cont])==0){
@@ -252,10 +249,10 @@ if(bandera == 0){
     }
   }
 }
-guardardatos(edad,nombre,igg,c_pacientes);
+guardardatos(edad,nombre,igg,c_pacientes,cedula);
 }
 
-void Modificardatos(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes,int vacunacion[tam]){
+void Modificardatos(int edad[tam],char nombre[tam][tam],float igg[tam],int c_pacientes,int vacunacion[tam],int cedula[tam]){
 
 int cont;
 char modificar[tam][tam];
@@ -267,7 +264,6 @@ for(cont=0;cont<c_pacientes;cont++){
 
 }
 }
-
 
 void leedatos(){
   int c,cont;

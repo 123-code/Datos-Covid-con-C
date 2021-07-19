@@ -1,0 +1,4 @@
+Nombre:juan
+
+Edad:12
+Valor Igg:1.000000
