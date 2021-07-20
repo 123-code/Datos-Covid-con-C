@@ -1,4 +1,67 @@
 Nombre:juan
 
-Edad:12
+Edad:3
+Valor Igg:4.000000
+Cedula: 1
+Nombre:g
+
+Edad:4
 Valor Igg:1.000000
+Cedula: 1
+Nombre:luis
+
+Edad:23
+Valor Igg:1.000000
+Cedula: 1234567890
+Analisis igg: POSITIVO
+
+Dato Ingresado IncorrectamenteNombre:luis
+
+Edad:23
+Valor Igg:1.000000
+Cedula: 1
+Analisis igg: POSITIVO
+
+Dato Ingresado IncorrectamenteNombre:juan
+
+Edad:12
+Valor Igg:3.000000
+Cedula: 1234567890
+Dato Ingresado IncorrectamenteNombre:juan
+
+Edad:12
+Valor Igg:3.000000
+Cedula: 1234567890
+Dato Ingresado IncorrectamenteNombre:p
+
+Edad:18
+Valor IGG:0.000000
+Valor IGM:0.000000
+Cedula: 1234567890
+Analisis IGG: NEGATIVO
+Analisis IGM: NEGATIVO
+Vacuna Aplicada: PfizerNombre:jose
+
+Edad:4
+Valor IGG:0.000000
+Valor IGM:0.000000
+Cedula: 1234567890
+Analisis IGG: NEGATIVO
+Analisis IGM: NEGATIVO
+Vacuna Aplicada: PfizerNombre:jose
+
+Edad:19
+Valor IGG:0.000000
+Valor IGM:0.000000
+Cedula: 1804072310
+Analisis IGG: NEGATIVO
+Analisis IGM: NEGATIVO
+Vacuna Aplicada: PfizerNombre:jose
+
+Edad:19
+Valor IGG:0.000000
+Valor IGM:0.000000
+Cedula: 1
+Analisis IGG: NEGATIVO
+Analisis IGM: NEGATIVO
+No Se Pudo Reconocer la Vacuna
